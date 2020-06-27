@@ -1,4 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'reuseable_card.dart';
+import 'icon_content.dart';
+
+const bottomContainerHeight = 60.0;
+const activeCardColor = Color(0xFF1D1E33);
 
 class InputPage extends StatefulWidget {
   @override
@@ -18,49 +25,55 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                ReusableCard(
-                  color: Color(0xFF1D1E33),
+                Expanded(
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.mars,
+                      text: "MALE",
+                    ),
+                  ),
                 ),
-                ReusableCard(
-                  color: Color(0xFF1D1E33),
+                Expanded(
+                  child: ReusableCard(
+                    color: activeCardColor,
+                    cardChild: IconContent(
+                      icon: FontAwesomeIcons.venus,
+                      text: "FEMALE",
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          ReusableCard(
-            color: Color(0xFF1D1E33),
+          Expanded(
+            child: ReusableCard(
+              color: activeCardColor,
+            ),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
-                ReusableCard(
-                  color: Color(0xFF1D1E33),
+                Expanded(
+                  child: ReusableCard(
+                    color: activeCardColor,
+                  ),
                 ),
-                ReusableCard(
-                  color: Color(0xFF1D1E33),
+                Expanded(
+                  child: ReusableCard(
+                    color: activeCardColor,
+                  ),
                 ),
               ],
             ),
           ),
+          Container(
+            color: Color(0xFFEB1555),
+            margin: EdgeInsets.only(top: 10),
+            width: double.infinity,
+            height: bottomContainerHeight,
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color color;
-  ReusableCard({@required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10),
-        ),
       ),
     );
   }
