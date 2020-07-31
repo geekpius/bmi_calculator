@@ -215,6 +215,7 @@ class _InputPageState extends State<InputPage> {
             margin: EdgeInsets.only(top: 10),
             width: double.infinity,
             height: kBottomContainerHeight,
+            child: Center(child: Text('CALCULATE'),),
           ),
         ],
       ),
