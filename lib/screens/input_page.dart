@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reuseable_card.dart';
-import 'icon_content.dart';
-import 'constants.dart';
+import '../components/reuseable_card.dart';
+import '../components/icon_content.dart';
+import '../constants.dart';
+import '../components/bottom_button.dart';
+import '../components/round_icon_button.dart';
+import '../calculator_brain.dart';
 
 //enumeration to represent gender
 enum Gender { male, female }
@@ -26,7 +29,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MBI CALCULATOR'),
+        title: kAppTitle,
         centerTitle: true,
       ),
       body: Column(
@@ -210,12 +213,16 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: Color(0xFFEB1555),
-            margin: EdgeInsets.only(top: 10),
-            width: double.infinity,
-            height: kBottomContainerHeight,
-            child: Center(child: Text('CALCULATE'),),
+          BottomButton(
+            onTapped: () {
+              CalculatorBrain cal = CalculatorBrain(height: height, weight: weight);
+              Navigator.pushNamed(context, '/result', arguments: {
+                'bmiResult': cal.calculateBMI(),
+                'textResult': cal.getResult(),
+                'interpretation': cal.getInterpretation()
+              });
+            },
+            buttonText: 'CALCULATE',
           ),
         ],
       ),
@@ -223,23 +230,6 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({@required this.icon, @required this.pressed});
-  final IconData icon;
-  final Function pressed;
 
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: pressed,
-      child: Icon(icon),
-      fillColor: Color(0xFF4C4F5E),
-      elevation: 6.0,
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-    );
-  }
-}
+
+
